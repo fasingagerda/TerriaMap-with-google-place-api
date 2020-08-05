@@ -1,0 +1,21 @@
+# Ignore everything
+*
+
+# Unignore directories (to all depths) and unignore code and style files
+!lib/**/
+!lib/**/*.js
+!lib/**/*.jsx
+!lib/**/*.ts
+!lib/**/*.tsx
+!lib/**/*.scss
+
+# Format translation files
+!lib/Language/**/*.json
+
+!test/**/
+!test/**/*.js
+!test/**/*.jsx
+!test/**/*.ts
+!test/**/*.tsx
+!test/**/*.scss
+

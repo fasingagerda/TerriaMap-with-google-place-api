@@ -1,0 +1,16 @@
+docs/
+node_modules/
+.idea/
+build/
+error.log
+output.log
+npm-debug.log
+.DS_Store
+terria.lib.js
+terriajs-server.log
+terriajs.pid
+/wwwroot/doc/
+/wwwroot/schema/
+/wwwroot/user-guide/
+package-lock.json
+*.swp
