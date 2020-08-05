@@ -17,9 +17,10 @@ import Terria from 'terriajs/lib/Models/Terria';
 import updateApplicationOnHashChange from 'terriajs/lib/ViewModels/updateApplicationOnHashChange';
 import updateApplicationOnMessageFromParentWindow from 'terriajs/lib/ViewModels/updateApplicationOnMessageFromParentWindow';
 import ViewState from 'terriajs/lib/ReactViewModels/ViewState';
-import BingMapsSearchProviderViewModel from 'terriajs/lib/ViewModels/BingMapsSearchProviderViewModel.js';
-import GazetteerSearchProviderViewModel from 'terriajs/lib/ViewModels/GazetteerSearchProviderViewModel.js';
-import GnafSearchProviderViewModel from 'terriajs/lib/ViewModels/GnafSearchProviderViewModel.js';
+// import BingMapsSearchProviderViewModel from 'terriajs/lib/ViewModels/BingMapsSearchProviderViewModel.js';
+// import GazetteerSearchProviderViewModel from 'terriajs/lib/ViewModels/GazetteerSearchProviderViewModel.js';
+// import GnafSearchProviderViewModel from 'terriajs/lib/ViewModels/GnafSearchProviderViewModel.js';
+import GoogleMapsSearchProviderViewModel from 'terriajs/lib/ViewModels/GoogleMapsSearchProviderViewModel.js';
 import defined from 'terriajs-cesium/Source/Core/defined';
 import render from './lib/Views/render';
 
@@ -61,17 +62,18 @@ module.exports = terria.start({
     shareDataService: new ShareDataService({
         terria: terria
     })
-}).otherwise(function(e) {
+}).otherwise(function (e) {
     raiseErrorToUser(terria, e);
-}).always(function() {
+}).always(function () {
     try {
         viewState.searchState.locationSearchProviders = [
-            new BingMapsSearchProviderViewModel({
-                terria: terria,
-                key: terria.configParameters.bingMapsKey
-            }),
-            new GazetteerSearchProviderViewModel({terria}),
-            new GnafSearchProviderViewModel({terria})
+            // new BingMapsSearchProviderViewModel({
+            //     terria: terria,
+            //     key: terria.configParameters.bingMapsKey
+            // }),
+            // new GazetteerSearchProviderViewModel({ terria }),
+            // new GnafSearchProviderViewModel({ terria }),
+            new GoogleMapsSearchProviderViewModel({ terria, key: terria.configParameters.googleMapsKey })
         ];
 
         // Automatically update Terria (load new catalogs, etc.) when the hash part of the URL changes.
@@ -99,7 +101,7 @@ module.exports = terria.start({
                 // This can be expressed as a devHostRegex ("any site starting with staging.") or a negative prodHostRegex ("any site not ending in .gov.au")
                 if (defined(globalDisclaimer.devHostRegex) && hostname.match(globalDisclaimer.devHostRegex) ||
                     defined(globalDisclaimer.prodHostRegex) && !hostname.match(globalDisclaimer.prodHostRegex)) {
-                        message += require('./lib/Views/DevelopmentDisclaimerPreamble.html');
+                    message += require('./lib/Views/DevelopmentDisclaimerPreamble.html');
                 }
                 message += require('./lib/Views/GlobalDisclaimer.html');
 
@@ -109,7 +111,7 @@ module.exports = terria.start({
                     width: 600,
                     height: 550,
                     message: message,
-                    horizontalPadding : 100
+                    horizontalPadding: 100
                 };
                 viewState.notifications.push(options);
             }

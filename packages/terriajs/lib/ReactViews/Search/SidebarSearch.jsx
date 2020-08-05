@@ -61,7 +61,7 @@ const SidebarSearch = createReactClass({
               of={this.props.viewState.searchState.locationSearchProviders}
             >
               <LocationSearchResults
-                key={search.name}
+                key={search.name + Math.random().toString()}
                 terria={this.props.terria}
                 viewState={this.props.viewState}
                 search={search}

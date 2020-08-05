@@ -2,6 +2,7 @@
     "port": 3001,
 
     "allowProxyFor" : [
+        "maps.googleapis.com",
         "nicta.com.au",
         "gov.au",
         "csiro.au",
