@@ -1,0 +1,16 @@
+version: '3'
+services:
+  app:
+    image: "node:12.18.3-slim"
+    command: bash -c "yarn config set workspaces-experimental true && yarn && npm run gulp && npm run start"
+    working_dir: /workdir
+    volumes:
+      - .:/workdir
+      - /workdir/node_modules/
+    ports:
+      - "3001:3001"
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
