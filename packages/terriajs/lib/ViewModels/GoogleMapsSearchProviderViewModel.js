@@ -57,7 +57,7 @@ GoogleMapsSearchProviderViewModel.prototype.search = function (searchText) {
     this._geocodeInProgress = undefined;
   }
   var thisGeocode = loadWithXhr({
-    url: this.terria.corsProxy.getURL(`https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${searchText}&inputtype=textquery&fields=formatted_address,name,rating,opening_hours,geometry&key=${this.key}`),
+    url: this.terria.corsProxy.getURL(`https://maps.googleapis.com/maps/api/place/textsearch/json?input=${searchText}&inputtype=textquery&fields=formatted_address,name,rating,opening_hours,geometry&key=${this.key}`),
     method: "GET",
     headers: { "Content-Type": "application/json" },
     responseType: "json"
@@ -68,11 +68,11 @@ GoogleMapsSearchProviderViewModel.prototype.search = function (searchText) {
 
     this.isSearching = false;
 
-    if (hits.candidates.length === 0) {
+    if (hits.results.length === 0) {
       this.searchMessage = i18next.t("viewModels.searchNoLocations");
       return;
     }
-    this.searchResults = hits.candidates.map((hit) => {
+    this.searchResults = hits.results.map((hit) => {
       return new SearchResultViewModel({
         name: hit.name,
         isImportant: true,
